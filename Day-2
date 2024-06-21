@@ -1,0 +1,89 @@
+function:
+
+def fun(x):
+    if(x==3):
+        return 500
+    print(x)
+    t=fun(x+1)
+    print(x)
+    return t
+print(fun(1))
+
+_______________________________________________________________
+
+sum of even and odd numbers:
+
+def sum_of_num(tup1, tup2):
+    def sum_even(tup):
+        if not tup:
+            return 0
+        h,*t=tup
+        if h%2==0:
+            return h+sum_even(tuple(t))
+        else:
+            return sum_even(tuple(t))
+    def sum_odd(tup):
+        if not tup:
+            return 0
+        h,*t=tup
+        if h%2!=0:
+            return h+sum_odd(tuple(t))
+        else:
+            return sum_odd(tuple(t))
+    sum1=sum_even(tup1)
+    sum2=sum_odd(tup2)
+    return (sum1,sum2)
+tuple1=(1, 2, 3, 4, 5)
+tuple2=(6, 7, 8, 9, 10)
+print(sum_of_num(tuple1, tuple2))
+even length:
+
+a=[8,6,2,4,10]
+if len(a)%2==0:
+    print("yes")
+else:
+    print("no")
+
+________________________________________________________________
+
+take a string from user and output must be shifted back to position which uh have given.
+
+def output_text(given_text,s):
+    output_text=""
+    for char in given_text:
+        if char.isalpha(): 
+            s_amount=s%26
+            new_char=ord(char)-s_amount
+            if char.islower():
+                if new_char<ord('a'):
+                    new_char+=26
+            elif char.isupper():
+                if new_char<ord('A'):
+                    new_char+=26
+            output_text+=chr(new_char)
+        else:
+            output_text+=char 
+    return output_text
+given_text=input("")
+s=int(input(" "))
+output=output_text(given_text, s)
+print("",output)
+
+_____________________________________________________________________________________
+
+longest string length sequence:
+
+def string_len(s):
+    max_len=0
+    c_len=1
+    for i in range(1,len(s)):
+        if ord(s[i])==ord(s[i-1])+1:
+            c_len+= 1
+        else:
+            max_len=max(max_len,c_len)
+            c_len=1
+    max_len=max(max_len,c_len)
+    return max_len
+input_str="xyzabcdefklmnopqefgh"
+print(string_len(input_str))
+
