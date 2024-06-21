@@ -1,0 +1,254 @@
+even number swap without5 swaping:
+class Node:
+    def _init_(self, data=None):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def _init_(self):
+        self.head = None
+    
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+    
+    def print_list(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+    
+    def reorder(self):
+        even_head = even_tail = odd_head = odd_tail = None
+        current = self.head
+        
+        while current:
+            next_node = current.next
+            current.next = None
+ 
+            if current.data % 2 == 0:
+                if even_head is None:
+                    even_head = even_tail = current
+                else:
+                    even_tail.next = current
+                    even_tail = current
+            else:
+                if odd_head is None:
+                    odd_head = odd_tail = current
+                else:
+                    odd_tail.next = current
+                    odd_tail = current
+            
+            current = next_node
+        
+        if even_head:
+            even_tail.next = odd_head
+            return LinkedList(even_head)
+        else:
+            return LinkedList(odd_head)
+
+a = [5, 7, 8, 2, 1, 4]
+input_list = LinkedList()
+for elem in a:
+    input_list.append(elem)
+
+output_list = input_list.reorder()
+output_list.print_list()
+_____________________________________________________________________________________
+
+co prime numbers or not:-
+
+def gcd(a,b):
+    while b:
+        a,b=b,a%b
+    return a
+def are_coprime(n1,n2):
+    return gcd(n1,n2)==1
+n1=int(input())
+n2=int(input())
+if are_coprime(n1,n2):
+    print(f"{n1} and {n2} are coprime numbers.")
+else:
+    print(f"{n1} and {n2} are not coprime numbers.")
+_____________________________________________________________________________________
+
+check the all brackets are in the order or not.if not give the index position.
+def check_balance(s):
+    a=[]
+    b={')':'(',']':'[','}':'{'}
+    for i,c in enumerate(s):
+        if c in b.values(): 
+            a.append((c, i))
+        elif c in b.keys(): 
+            if a and a[-1][0]==b[c]:
+                a.pop()
+            else:
+                return i
+    if a:
+        return a[-1][1] 
+    return -1
+s="[()]()"
+result=check_balance(s)
+print(result) 
+_____________________________________________________________________________________
+difference of sum of even and odd in dll:-
+class Node:
+    def _init_(self, u):
+        self.data = u
+        self.next = None
+        self.prev = None  
+class DLL:
+    def _init_(self):
+        self.head = None
+        self.tail = None
+    def addback(self, x):
+        if self.head is None:
+            self.head = Node(x)
+            self.tail = self.head
+        else:
+            t = Node(x)
+            self.tail.next = t
+            t.prev = self.tail
+            self.tail = self.tail.next
+    def addfront(self, x):
+        if self.head is None:
+            self.head = Node(x)
+            self.tail = self.head
+        else:
+            t = Node(x)
+            t.next = self.head
+            self.head.prev = t
+            self.head = t
+    def display(self):
+        t = self.head
+        while t is not None:
+            print(t.data, end="->")
+            t = t.next
+        print("None")
+    def rev_display(self):
+        t = self.tail
+        while t is not None:
+            print(t.data, end="->")
+  t = t.prev
+        print("None")
+    def linear_search(self, x):
+        t = self.head
+        while t is not None:
+            if t.data == x:
+                return "found"
+            t = t.next
+        return "not found"
+    def evenn(self):
+        count = 0
+        t = self.head
+        while t:
+            count += 1
+            t = t.next
+        return "even" if count % 2 == 0 else "odd"
+    def palindrome(self):
+        s = self.head
+        e = self.tail
+        while s != e and s.prev != e:
+            if s.data != e.data:
+                return "not a palindrome"
+            s = s.next
+            e = e.prev
+        return "palindrome"
+    def secondfirst(self):
+        s = self.head
+        while s is not None:
+            print(s.data, end=" ")
+            s = s.next
+        print()
+        f = self.tail
+        while f is not None:
+            print(f.data, end=" ")
+            f = f.prev
+        print()
+    def reorder(self):
+        if self.head is None or self.head.next is None:
+            return
+        nodes = []
+        current = self.head
+        while current is not None:
+            nodes.append(current)
+            current = current.next
+        nodes.sort(key=lambda node: node.data)
+        self.head = nodes[0]
+        self.head.prev = None
+        current = self.head
+        for i in range(1, len(nodes)):
+            current.next = nodes[i]
+            nodes[i].prev = current
+            current = current.next
+        self.tail = current
+        self.tail.next = None\
+    def _even_odd_sums_recursive(self, node, even_sum, odd_sum):
+        if node is None:
+            return even_sum, odd_sum
+        if node.data % 2 == 0:
+            even_sum += node.data
+        else:
+            odd_sum += node.data
+        return self._even_odd_sums_recursive(node.next, even_sum, odd_sum)
+    def even_odd_sums(self):
+        return self._even_odd_sums_recursive(self.head, 0, 0)
+l1 = DLL()
+l1.addback(8)
+l1.addback(7)
+l1.addback(9)
+l1.addfront(3)
+l1.addfront(5)
+l1.rev_display()  
+l1.display()      
+print(l1.linear_search(110))  
+print(l1.evenn())             
+print(l1.palindrome())        
+l1.secondfirst()              
+l1.reorder()                
+l1.display() 
+even_sum, odd_sum = l1.even_odd_sums()
+print("Sum of even numbers:", even_sum)
+print("Sum of odd numbers:", odd_sum)
+
+_____________________________________________________________________________________
+write a program to print all three three possible in a list  code in python using recusion?
+
+class Node:
+    def _init_(self,data):
+        self.data=data
+        self.next=None
+def l_list(nums):
+    if not nums:
+        return None
+    h=Node(nums[0])
+    c=h
+    for num in nums[1:]:
+        c.next=Node(num)
+        c=c.next
+    return h
+def print_num(h):
+    def n_t(n,s,t):
+        if len(t)==3:
+            print(t)
+            return
+        c=s
+        while c:
+            n_t(n,c.next,t+[c.data])
+            c=c.next
+    c=h
+    while c:
+        n_t(c,c.next,[c.data])
+        c=c.next
+nums=[3,2,5,4,6,8]
+a=l_list(nums)
+print_num(a)
+
+
