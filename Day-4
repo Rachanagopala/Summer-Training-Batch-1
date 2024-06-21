@@ -1,0 +1,228 @@
+class node:
+    def init(self,u):
+        self.data=u
+        self.next=None
+class sll:
+    def init(self):
+        self.head=None
+    def display(self):
+        t=self.head
+        while(t!=None):
+            print(t.data,end="->")
+            t=t.next
+    def addback(self,x):
+        t=self.head
+        while(t.next!=None):
+            t=t.next
+        t.next=node(x)
+    def addeven(self):
+        self.head
+        s=0
+        while(t!=None):
+            if(t.data%2==0):
+                s=s+t.data
+    def search(self,x):
+        t=self.head
+        while (t!=None):
+            if t.data==x:
+                return "found"
+            t=t.next
+        return "not found"
+    def mid(self):
+        a=self.head
+        b=self.head
+        while b is not None and b.next is not None:
+            a=a.next
+            b=b.next.next
+if a is not None:
+            print("  mid is",a.data)
+    def evenn(self):
+        a=self.head
+        b=self.head
+        while(b!=None and b.next!=None):
+            a=a.next
+            b=b.next.next
+            if(b==None):
+                print("even")
+            else:
+                print("odd")
+
+    def allpairs(self):
+        t=self.head
+        while(t.next!=None):
+            t1=t.next
+            while(t1!=None):
+                print(t.data,t1.data)
+                t1=t1.next
+            t=t.next
+    def bubble_sort(self):
+        end = None
+        while (end != self.head):
+            swapped = False
+            c = self.head
+            while c.next != end:
+                next_node = c.next
+                if c.data > next_node.data:
+                    c.data, next_node.data = next_node.data, c.data
+                    swapped = True
+                c = c.next
+            if not swapped:
+                break
+            end = c
+def print_list(self):
+        c = self.head
+        while c:
+            print(c.data, end=" ")
+            c = c.next
+        print()
+    
+    def bubble(self):
+        c=0
+        T=self.head
+        p=None
+        while(T.next!=None):
+            f=0
+            t=self.head
+            while(t.next!=None):
+                if(t.data>t.next.data):
+                    f=1
+                    t.data,t.next.data=t.next.data
+                t=t.nxt
+                c=c+1
+            if(f==0):
+                break
+            p=t'0
+             
+                
+l1=sll()
+l1.head=node(10)
+l1.addback(20)
+l1.addback(40)
+l1.addback(50)
+l1.addback(60)
+l1.addback(70)
+print(l1.search(20))
+l1.display()
+l1.mid()
+l1.evenn()
+l1.allpairs()
+l1.bubble_sort()
+l1.print_list()
+l1.bubble()
+l1.display()
+print(b)
+
+____________________________________________________________________________________
+double linked list :-
+
+class node:
+    def _init_(self, u):
+        self.data = u
+        self.nxt = None
+        self.prev = None
+class dll:
+    def _init_(self):
+        self.head = None
+        self.tail = None
+    def display(self):
+        t = self.head
+        while t != None:
+            print(t.data, end="->")
+            t = t.nxt
+        print()
+    def addback(self, x):
+        if self.head == None:
+            self.head = node(x)
+            self.tail = self.head
+        else:
+            t = node(x)
+            t.prev = self.tail
+            self.tail.nxt = t
+            self.tail = t
+    def addfront(self, x):
+        if self.head == None:
+            self.head = node(x)
+            self.tail = self.head
+        else:
+            t = node(x)
+            t.nxt = self.head
+            self.head.prev = t
+            self.head = t
+    def rev_display(self):
+        t = self.tail
+        while t != None:
+            print(t.data, end="->")
+            t = t.prev
+ print()
+    def search(self,x):
+        t=self.head
+        while(t!=None):
+            if t.data==x:
+                return "found"
+            t=t.nxt
+        return "not found" 
+    def even(self):
+        c=0
+        t=self.head
+        while t:
+            c+=1
+            p=t.nxt
+        if c%2==0:
+            return "even"
+        else:
+            return "odd"
+    def palindrome(self):
+        a=self.head
+        b=self.tail
+        while(a!=b and a.prev!=b):
+            if a.data!=b.data:
+                return "not a palindrome"
+            a=a.nxt
+            b=b.prev
+        return "palindrome"
+    def seq(self):
+        a=self.head
+        b=self.head
+        while(a!=None):
+            a=a.nxt.nxt
+            b=b.nxt
+        b.tail.nxt=b.head
+        b.head.prev=b.tail
+        t1=b.prev
+        t1.nxt=None
+b.prev=None
+        b.head=b
+        b.tail=t1   
+l1 = dll()
+l1.addback(20)
+l1.addfront(35)
+l1.addback(40)
+l1.addback(50)
+l1.addfront(5)
+l1.rev_display()
+l1.display()
+print(l1.even())
+print(l1.search(20))
+print(l1.palindrome())
+_____________________________________________________________________________________
+from the list print where that no. occur more than half of the list length.
+
+a=[1,1,1,2,2,1]
+h_len=len(a)/2
+occ={}
+for n in a:
+    if n in occ:
+        occ[n]+=1
+    else:
+        occ[n]=1
+for n, c in occ.items():
+    if c>h_len:
+        print(n)
+_____________________________________________________________________________________
+find the missing no. in a range.
+a=[0,5,3,6,7,4,1]
+for i in range(0,7):
+    if( i not in a):
+        print(i)
+
+
