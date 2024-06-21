@@ -1,0 +1,122 @@
+reverse palindrome using recusion:
+
+def fun(x,re):
+    if(x==0):
+        return re
+    re=re*10+(x%10)
+    return fun(x//10,re)
+n=int(input())
+if(n==fun(n,0)):
+    print("palindrome")
+else:
+    print("not palindrome")
+____________________________________________________________________________________
+a=5
+k=1
+for i in range(5):
+    for j in range(5):
+        if(i==0 or j==0 or i==a-1 or j==a-1):
+            print("* ",end='')
+        else:
+            print(k,end=' ')
+            k=k+1
+    print()
+output:
+* * * * * 
+* 1 2 3 * 
+* 4 5 6 * 
+* 7 8 9 * 
+* * * * * 
+_____________________________________________________________________________________
+combine pairs of of string using linked list:-
+
+class Node:
+def _init_(self, data=None):
+        self.data = data
+        self.next = None
+class LinkedList:
+    def _init_(self):
+        self.head = None
+    def append(self, data):
+        if not self.head:
+            self.head = Node(data)
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = Node(data)
+    def print_all_pairs(self):
+        if not self.head:
+            return
+        current1 = self.head
+        while current1:
+            current2 = current1.next
+            while current2:
+                print(f"({current1.data}, {current2.data})")
+                current2 = current2.next
+            current1 = current1.next
+input_number = 6748201
+input_str = str(input_number)
+ll = LinkedList()
+for digit in input_str:
+    ll.append(digit)
+ll.print_all_pairs()
+_____________________________________________________________________________________
+bubble sort using linkedlist:-
+class Node:
+    def _init_(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def _init_(self):
+        self.head = None
+
+    def append(self, data):
+        if not self.head:
+            self.head = Node(data)
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = Node(data)
+
+    def bubble_sort(self):
+        end = None
+        while end != self.head:
+            swapped = False
+            current = self.head
+            while current.next != end:
+                next_node = current.next
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                    swapped = True
+                current = current.next
+            if not swapped:
+                break
+            end = current
+def print_list(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+
+
+ll = LinkedList()
+ll.append(64)
+ll.append(34)
+ll.append(25)
+ll.append(12)
+ll.append(22)
+ll.append(11)
+ll.append(90)
+
+print("Linked List before sorting:")
+ll.print_list()
+
+ll.bubble_sort()
+
+print("Linked List after sorting:")
+ll.print_list()
+
