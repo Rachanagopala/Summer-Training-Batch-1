@@ -1,0 +1,69 @@
+def is_prime(num):
+    if num<=1:
+        return false
+    for i in range (2,int(num//2)+1):
+        if num%i==0:
+            return False
+    return True
+number=73
+if is_prime(number):
+    print(number,"is prime")
+else:
+    print(number,"is not prime")
+_____________________________________________________________________
+
+def prime_digit(num):
+    prime_digit={'2','3','5','7'}
+    count=0
+    for d in str(num):
+        if d in prime_digit:
+            count += 1
+    return count
+num=467765
+print(prime_digit(num))
+_______________________________________________________________________
+
+def password_checker(p):
+    min_leng=8
+    c={
+        'uc':False,
+        'lc':False,
+        'd':False,
+        's':False
+    }
+    special_char="!@#$%^&*()-_+=~`[]{}|:;'<>,.?/"
+    for char in p:
+        if char.isupper():
+            c['uc']=True
+        elif char.islower():
+            c['lc']=True
+        elif char.isdigit():
+            c['d']=True
+        elif char in special_char:
+            criteria['s']=True
+    missing_criteria_count=sum(1 for value in c.values() if value is False)
+    additional_characters_needed=max(0,min_leng-len(p))+missing_criteria_count
+    return additional_characters_needed
+password=input("Enter your password: ")
+additional_chars=password_checker(p)
+print(additional_chars)
+______________________________________________________________
+
+individual digits adding prime:
+
+def is_prime(num):
+    if num<=1:
+        return False
+    for i in range(2,int(num**0.5)+1):
+        if num%i==0:
+            return False
+    return True
+number=61
+digits=[int(digit) for digit in str(number)]
+sum_of_digits=sum(digits)
+if is_prime(sum_of_digits):
+    print(sum_of_digits, "is prime number.")
+else:
+    print(sum_of_digits, "is not prime number.")
+
+
