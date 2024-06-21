@@ -1,0 +1,2177 @@
+even number swap without5 swaping:
+class Node:
+    def _init_(self, data=None):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def _init_(self):
+        self.head = None
+    
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+    
+    def print_list(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+    
+    def reorder(self):
+        even_head = even_tail = odd_head = odd_tail = None
+        current = self.head
+        
+        while current:
+            next_node = current.next
+            current.next = None
+            
+            if current.data % 2 == 0:
+                if even_head is None:
+                    even_head = even_tail = current
+                else:
+                    even_tail.next = current
+even_tail = current
+            else:
+                if odd_head is None:
+                    odd_head = odd_tail = current
+                else:
+                    odd_tail.next = current
+                    odd_tail = current
+            
+            current = next_node
+        
+        if even_head:
+            even_tail.next = odd_head
+            return LinkedList(even_head)
+        else:
+            return LinkedList(odd_head)
+
+a = [5, 7, 8, 2, 1, 4]
+input_list = LinkedList()
+for elem in a:
+    input_list.append(elem)
+
+output_list = input_list.reorder()
+output_list.print_list()
+________________________________________________________________
+def is_prime(num):
+    if num<=1:
+        return false
+    for i in range (2,int(num//2)+1):
+        if num%i==0:
+            return False
+    return True
+number=73
+if is_prime(number):
+    print(number,"is prime")
+else:
+    print(number,"is not prime")
+_____________________________________________________________________
+
+def prime_digit(num):
+    prime_digit={'2','3','5','7'}
+    count=0
+    for d in str(num):
+        if d in prime_digit:
+            count += 1
+    return count
+num=467765
+print(prime_digit(num))
+
+_______________________________________________________________________
+
+def password_checker(p):
+    min_leng=8
+    c={
+        'uc':False,
+        'lc':False,
+        'd':False,
+        's':False
+    }
+    special_char="!@#$%^&*()-_+=~`[]{}|:;'<>,.?/"
+    for char in p:
+        if char.isupper():
+            c['uc']=True
+        elif char.islower():
+            c['lc']=True
+        elif char.isdigit():
+            c['d']=True
+        elif char in special_char:
+            criteria['s']=True
+    missing_criteria_count=sum(1 for value in c.values() if value is False)
+    additional_characters_needed=max(0,min_leng-len(p))+missing_criteria_count
+    return additional_characters_needed
+password=input("Enter your password: ")
+additional_chars=password_checker(p)
+print(additional_chars)
+
+_______________________________________________________________
+
+individual digits adding prime:
+
+def is_prime(num):
+    if num<=1:
+        return False
+    for i in range(2,int(num**0.5)+1):
+        if num%i==0:
+            return False
+    return True
+number=61
+digits=[int(digit) for digit in str(number)]
+sum_of_digits=sum(digits)
+if is_prime(sum_of_digits):
+    print(sum_of_digits, "is prime number.")
+else:
+    print(sum_of_digits, "is not prime number.")
+
+_____________________________________________________________
+
+function:
+
+def fun(x):
+    if(x==3):
+        return 500
+    print(x)
+    t=fun(x+1)
+    print(x)
+    return t
+print(fun(1))
+
+_______________________________________________________________
+
+sum of even and odd numbers:
+
+def sum_of_num(tup1, tup2):
+    def sum_even(tup):
+        if not tup:
+            return 0
+        h,*t=tup
+        if h%2==0:
+            return h+sum_even(tuple(t))
+        else:
+            return sum_even(tuple(t))
+    def sum_odd(tup):
+        if not tup:
+            return 0
+        h,*t=tup
+        if h%2!=0:
+            return h+sum_odd(tuple(t))
+        else:
+            return sum_odd(tuple(t))
+    sum1=sum_even(tup1)
+    sum2=sum_odd(tup2)
+    return (sum1,sum2)
+tuple1=(1, 2, 3, 4, 5)
+tuple2=(6, 7, 8, 9, 10)
+print(sum_of_num(tuple1, tuple2))
+
+______________________________________________________________
+
+even length:
+
+a=[8,6,2,4,10]
+if len(a)%2==0:
+    print("yes")
+else:
+    print("no")
+
+________________________________________________________________
+
+take a string from user and output must be shifted back to position which uh have given.
+
+def output_text(given_text,s):
+    output_text=""
+    for char in given_text:
+        if char.isalpha(): 
+            s_amount=s%26
+            new_char=ord(char)-s_amount
+            if char.islower():
+                if new_char<ord('a'):
+                    new_char+=26
+            elif char.isupper():
+                if new_char<ord('A'):
+                    new_char+=26
+            output_text+=chr(new_char)
+        else:
+            output_text+=char 
+    return output_text
+given_text=input("")
+s=int(input(" "))
+output=output_text(given_text, s)
+print("",output)
+_____________________________________________________________________________________
+
+longest string length sequence:
+
+def string_len(s):
+    max_len=0
+    c_len=1
+    for i in range(1,len(s)):
+        if ord(s[i])==ord(s[i-1])+1:
+            c_len+= 1
+        else:
+            max_len=max(max_len,c_len)
+            c_len=1
+    max_len=max(max_len,c_len)
+    return max_len
+input_str="xyzabcdefklmnopqefgh"
+print(string_len(input_str))
+_____________________________________________________________________________________
+reverse palindrome using recusion:
+
+def fun(x,re):
+    if(x==0):
+        return re
+    re=re*10+(x%10)
+    return fun(x//10,re)
+n=int(input())
+if(n==fun(n,0)):
+    print("palindrome")
+else:
+    print("not palindrome")
+____________________________________________________________________________________
+a=5
+k=1
+for i in range(5):
+    for j in range(5):
+        if(i==0 or j==0 or i==a-1 or j==a-1):
+            print("* ",end='')
+        else:
+            print(k,end=' ')
+            k=k+1
+    print()
+output:
+* * * * * 
+* 1 2 3 * 
+* 4 5 6 * 
+* 7 8 9 * 
+* * * * * 
+_____________________________________________________________________________________
+combine pairs of of string using linked list:-
+
+class Node:
+    def _init_(self, data=None):
+        self.data = data
+        self.next = None
+class LinkedList:
+    def _init_(self):
+        self.head = None
+    def append(self, data):
+        if not self.head:
+            self.head = Node(data)
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = Node(data)
+    def print_all_pairs(self):
+        if not self.head:
+            return
+        current1 = self.head
+        while current1:
+            current2 = current1.next
+            while current2:
+                print(f"({current1.data}, {current2.data})")
+                current2 = current2.next
+            current1 = current1.next
+input_number = 6748201
+input_str = str(input_number)
+ll = LinkedList()
+for digit in input_str:
+    ll.append(digit)
+ll.print_all_pairs()
+_____________________________________________________________________________________
+bubble sort using linkedlist:-
+class Node:
+    def _init_(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def _init_(self):
+        self.head = None
+
+    def append(self, data):
+        if not self.head:
+            self.head = Node(data)
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = Node(data)
+
+    def bubble_sort(self):
+        end = None
+        while end != self.head:
+            swapped = False
+            current = self.head
+            while current.next != end:
+                next_node = current.next
+                if current.data > next_node.data:
+                    current.data, next_node.data = next_node.data, current.data
+                    swapped = True
+                current = current.next
+            if not swapped:
+                break
+            end = current
+
+    def print_list(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+
+# Example usage:
+ll = LinkedList()
+ll.append(64)
+ll.append(34)
+ll.append(25)
+ll.append(12)
+ll.append(22)
+ll.append(11)
+ll.append(90)
+
+print("Linked List before sorting:")
+ll.print_list()
+
+ll.bubble_sort()
+
+print("Linked List after sorting:")
+ll.print_list()
+
+_____________________________________________________________________________________
+
+
+class node:
+    def init(self,u):
+        self.data=u
+        self.next=None
+class sll:
+    def init(self):
+        self.head=None
+    def display(self):
+        t=self.head
+        while(t!=None):
+            print(t.data,end="->")
+            t=t.next
+    def addback(self,x):
+        t=self.head
+        while(t.next!=None):
+            t=t.next
+        t.next=node(x)
+    def addeven(self):
+        self.head
+        s=0
+        while(t!=None):
+            if(t.data%2==0):
+                s=s+t.data
+    def search(self,x):
+        t=self.head
+        while (t!=None):
+            if t.data==x:
+                return "found"
+            t=t.next
+        return "not found"
+    def mid(self):
+        a=self.head
+        b=self.head
+        while b is not None and b.next is not None:
+            a=a.next
+            b=b.next.next
+        if a is not None:
+            print("  mid is",a.data)
+    def evenn(self):
+        a=self.head
+        b=self.head
+        while(b!=None and b.next!=None):
+            a=a.next
+            b=b.next.next
+            if(b==None):
+                print("even")
+            else:
+                print("odd")
+
+    def allpairs(self):
+        t=self.head
+        while(t.next!=None):
+            t1=t.next
+            while(t1!=None):
+                print(t.data,t1.data)
+                t1=t1.next
+            t=t.next
+    def bubble_sort(self):
+        end = None
+        while (end != self.head):
+            swapped = False
+            c = self.head
+            while c.next != end:
+                next_node = c.next
+                if c.data > next_node.data:
+                    c.data, next_node.data = next_node.data, c.data
+                    swapped = True
+                c = c.next
+            if not swapped:
+                break
+            end = c
+                
+    def print_list(self):
+        c = self.head
+        while c:
+            print(c.data, end=" ")
+            c = c.next
+        print()
+    
+    def bubble(self):
+        c=0
+        T=self.head
+        p=None
+        while(T.next!=None):
+            f=0
+            t=self.head
+            while(t.next!=None):
+                if(t.data>t.next.data):
+                    f=1
+                    t.data,t.next.data=t.next.data
+                t=t.nxt
+                c=c+1
+            if(f==0):
+                break
+            p=t'0
+             
+                
+l1=sll()
+l1.head=node(10)
+l1.addback(20)
+l1.addback(40)
+l1.addback(50)
+l1.addback(60)
+l1.addback(70)
+print(l1.search(20))
+l1.display()
+l1.mid()
+l1.evenn()
+l1.allpairs()
+l1.bubble_sort()
+l1.print_list()
+l1.bubble()
+l1.display()
+print(b)
+
+____________________________________________________________________________________
+double linked list :-
+
+class node:
+    def _init_(self, u):
+        self.data = u
+        self.nxt = None
+        self.prev = None
+class dll:
+    def _init_(self):
+        self.head = None
+        self.tail = None
+    def display(self):
+        t = self.head
+        while t != None:
+            print(t.data, end="->")
+            t = t.nxt
+        print()
+    def addback(self, x):
+        if self.head == None:
+            self.head = node(x)
+            self.tail = self.head
+        else:
+            t = node(x)
+            t.prev = self.tail
+            self.tail.nxt = t
+            self.tail = t
+    def addfront(self, x):
+        if self.head == None:
+            self.head = node(x)
+            self.tail = self.head
+        else:
+            t = node(x)
+            t.nxt = self.head
+            self.head.prev = t
+            self.head = t
+    def rev_display(self):
+        t = self.tail
+        while t != None:
+            print(t.data, end="->")
+            t = t.prev
+        print()
+    def search(self,x):
+        t=self.head
+        while(t!=None):
+            if t.data==x:
+                return "found"
+            t=t.nxt
+        return "not found" 
+    def even(self):
+        c=0
+        t=self.head
+        while t:
+            c+=1
+            p=t.nxt
+        if c%2==0:
+            return "even"
+        else:
+            return "odd"
+    def palindrome(self):
+        a=self.head
+        b=self.tail
+        while(a!=b and a.prev!=b):
+            if a.data!=b.data:
+                return "not a palindrome"
+            a=a.nxt
+            b=b.prev
+        return "palindrome"
+    def seq(self):
+        a=self.head
+        b=self.head
+        while(a!=None):
+            a=a.nxt.nxt
+            b=b.nxt
+        b.tail.nxt=b.head
+        b.head.prev=b.tail
+        t1=b.prev
+        t1.nxt=None
+        b.prev=None
+        b.head=b
+        b.tail=t1   
+l1 = dll()
+l1.addback(20)
+l1.addfront(35)
+l1.addback(40)
+l1.addback(50)
+l1.addfront(5)
+l1.rev_display()
+l1.display()
+print(l1.even())
+print(l1.search(20))
+print(l1.palindrome())
+
+_____________________________________________________________________________________
+from the list print where that no. occur more than half of the list length.
+
+a=[1,1,1,2,2,1]
+h_len=len(a)/2
+occ={}
+for n in a:
+    if n in occ:
+        occ[n]+=1
+    else:
+        occ[n]=1
+for n, c in occ.items():
+    if c>h_len:
+        print(n)
+_____________________________________________________________________________________
+find the missing no. in a range.
+a=[0,5,3,6,7,4,1]
+for i in range(0,7):
+    if( i not in a):
+        print(i)
+_____________________________________________________________________________________
+even number swap without5 swaping:
+class Node:
+    def _init_(self, data=None):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def _init_(self):
+        self.head = None
+    
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        last = self.head
+        while last.next:
+            last = last.next
+        last.next = new_node
+    
+    def print_list(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+    
+    def reorder(self):
+        even_head = even_tail = odd_head = odd_tail = None
+        current = self.head
+        
+        while current:
+            next_node = current.next
+            current.next = None
+            
+            if current.data % 2 == 0:
+                if even_head is None:
+                    even_head = even_tail = current
+                else:
+                    even_tail.next = current
+                    even_tail = current
+            else:
+                if odd_head is None:
+                    odd_head = odd_tail = current
+                else:
+                    odd_tail.next = current
+                    odd_tail = current
+            
+            current = next_node
+        
+        if even_head:
+            even_tail.next = odd_head
+            return LinkedList(even_head)
+        else:
+            return LinkedList(odd_head)
+
+a = [5, 7, 8, 2, 1, 4]
+input_list = LinkedList()
+for elem in a:
+    input_list.append(elem)
+
+output_list = input_list.reorder()
+output_list.print_list()
+_____________________________________________________________________________________
+
+co prime numbers or not:-
+
+def gcd(a,b):
+    while b:
+        a,b=b,a%b
+    return a
+def are_coprime(n1,n2):
+    return gcd(n1,n2)==1
+n1=int(input())
+n2=int(input())
+if are_coprime(n1,n2):
+    print(f"{n1} and {n2} are coprime numbers.")
+else:
+    print(f"{n1} and {n2} are not coprime numbers.")
+_____________________________________________________________________________________
+
+
+check the all brackets are in the order or not.if not give the index position.
+def check_balance(s):
+    a=[]
+    b={')':'(',']':'[','}':'{'}
+    for i,c in enumerate(s):
+        if c in b.values(): 
+            a.append((c, i))
+        elif c in b.keys(): 
+            if a and a[-1][0]==b[c]:
+                a.pop()
+            else:
+                return i
+    if a:
+        return a[-1][1] 
+    return -1
+s="[()]()"
+result=check_balance(s)
+print(result) 
+_____________________________________________________________________________________
+difference of sum of even and odd in dll:-
+class Node:
+    def _init_(self, u):
+        self.data = u
+        self.next = None
+        self.prev = None  
+class DLL:
+    def _init_(self):
+        self.head = None
+        self.tail = None
+    def addback(self, x):
+        if self.head is None:
+            self.head = Node(x)
+            self.tail = self.head
+        else:
+            t = Node(x)
+            self.tail.next = t
+            t.prev = self.tail
+            self.tail = self.tail.next
+    def addfront(self, x):
+        if self.head is None:
+            self.head = Node(x)
+            self.tail = self.head
+        else:
+            t = Node(x)
+            t.next = self.head
+            self.head.prev = t
+            self.head = t
+    def display(self):
+        t = self.head
+        while t is not None:
+            print(t.data, end="->")
+            t = t.next
+        print("None")
+    def rev_display(self):
+        t = self.tail
+        while t is not None:
+            print(t.data, end="->")
+            t = t.prev
+        print("None")
+    def linear_search(self, x):
+        t = self.head
+        while t is not None:
+            if t.data == x:
+                return "found"
+            t = t.next
+        return "not found"
+    def evenn(self):
+        count = 0
+        t = self.head
+        while t:
+            count += 1
+            t = t.next
+        return "even" if count % 2 == 0 else "odd"
+    def palindrome(self):
+        s = self.head
+        e = self.tail
+        while s != e and s.prev != e:
+            if s.data != e.data:
+                return "not a palindrome"
+            s = s.next
+            e = e.prev
+        return "palindrome"
+    def secondfirst(self):
+        s = self.head
+        while s is not None:
+            print(s.data, end=" ")
+            s = s.next
+        print()
+        f = self.tail
+        while f is not None:
+            print(f.data, end=" ")
+            f = f.prev
+        print()
+    def reorder(self):
+        if self.head is None or self.head.next is None:
+            return
+        nodes = []
+        current = self.head
+        while current is not None:
+            nodes.append(current)
+            current = current.next
+        nodes.sort(key=lambda node: node.data)
+        self.head = nodes[0]
+        self.head.prev = None
+        current = self.head
+        for i in range(1, len(nodes)):
+            current.next = nodes[i]
+            nodes[i].prev = current
+            current = current.next
+        self.tail = current
+        self.tail.next = None\
+    def _even_odd_sums_recursive(self, node, even_sum, odd_sum):
+        if node is None:
+            return even_sum, odd_sum
+        if node.data % 2 == 0:
+            even_sum += node.data
+        else:
+            odd_sum += node.data
+        return self._even_odd_sums_recursive(node.next, even_sum, odd_sum)
+    def even_odd_sums(self):
+        return self._even_odd_sums_recursive(self.head, 0, 0)
+l1 = DLL()
+l1.addback(8)
+l1.addback(7)
+l1.addback(9)
+l1.addfront(3)
+l1.addfront(5)
+l1.rev_display()  
+l1.display()      
+print(l1.linear_search(110))  
+print(l1.evenn())             
+print(l1.palindrome())        
+l1.secondfirst()              
+l1.reorder()                
+l1.display() 
+even_sum, odd_sum = l1.even_odd_sums()
+print("Sum of even numbers:", even_sum)
+print("Sum of odd numbers:", odd_sum)
+
+_____________________________________________________________________________________
+write a program to print all three three possible in a list  code in python using recusion?
+
+class Node:
+    def _init_(self,data):
+        self.data=data
+        self.next=None
+def l_list(nums):
+    if not nums:
+        return None
+    h=Node(nums[0])
+    c=h
+    for num in nums[1:]:
+        c.next=Node(num)
+        c=c.next
+    return h
+def print_num(h):
+    def n_t(n,s,t):
+        if len(t)==3:
+            print(t)
+            return
+        c=s
+        while c:
+            n_t(n,c.next,t+[c.data])
+            c=c.next
+    c=h
+    while c:
+        n_t(c,c.next,[c.data])
+        c=c.next
+nums=[3,2,5,4,6,8]
+a=l_list(nums)
+print_num(a)
+_____________________________________________________________________________________
+
+write a program to print all three three possible in a list  code in python
+
+def n_t(lst):
+    n = len(lst)
+    for i in range(n):
+        for j in range(i+1,n):
+            for k in range(j+1,n):
+                print((lst[i],lst[j],lst[k]))
+a=[3,2,5,4,1,6,8]
+n_t(a)
+
+using recusion:-
+def n_t(lst,s,c_t):
+    if len(c_t)==3:
+        print(c_t)
+        return
+    for i in range(s,len(lst)):
+        n_t(lst,i+1,c_t+[lst[i]])
+def triplets(lst):
+    n_t(lst,0,[])
+a= [3,2,5,4,1,6,8]
+triplets(a)
+____________________________________________________________________________________
+
+a=input()
+n=int(input())
+str=''
+for i in range(n):
+    b=input()
+    if(b[0]=='L'):
+        str=str+a[int(b[2])]
+    else:
+        str=str+a[-int(b[2])]
+print(str)
+str=list(str)
+str.sort()
+b=[]
+for i in range(len(a)-n+1):
+    t=sorted(list(a[i:n+i]))
+    b.append(t)
+print(b)
+print(str)
+for i in b:
+    if(i==str):
+        print("yes")
+        break
+else:
+    print("no")
+_____________________________________________________________________________________
+
+prime number using recussion:
+
+def is_prime(n):
+    if n<=1:
+        return False
+    if n==2:
+        return True
+    if n%2==0:
+        return False
+    for i in range(3,int(n**0.5)+1,2):
+        if n%i==0:
+            return False
+    return True
+def sum_primes(num):
+    for i in range(2,num):
+        if is_prime(i) and is_prime(num-i):
+            return "yes"
+    return "no"
+a=12
+result=sum_primes(a)
+print(result)
+_____________________________________________________________________________________
+
+n=int(input())
+while(n):
+    a=input()
+    c=input()
+    s=''
+    for i in a:
+        if(i in c):
+            s=s+(i*c.count(i))
+    print(s)
+    n=n-1
+_____________________________________________________________________________________
+non adjacent sequence:-
+input:13,9,4,10,5,7
+output:-30
+def nums(arr,n):
+    if n<=0:
+        return 0
+    i=arr[n-1]+nums(arr, n-2)
+    e=nums(arr, n-1)
+    return max(i,e)
+def sum_nums(arr):
+    n = len(arr)
+    return nums(arr, n)
+a=[13, 9, 4, 10, 5, 7]
+print(sum_nums(a))
+_____________________________________________________________________________________
+2d array sequence in a list:
+
+a=[1,2,3,4,1,2,3,1,2]
+m=[]
+c=0
+while(c!=len(a)):
+    r=[]
+    for i in range(len(a)):
+        if(not str(a[i]).isalpha()):
+            if(a[i] not in r):
+                c=c+1
+                r.append(a[i])
+                a[i]='a'
+    m.append(r)
+print(m)
+_____________________________________________________________________________________
+all alphabets are present or not in astring:
+def alpha(s):
+    a=set("abcdefghijklmnopqrstuvwxyz")
+    b=set(s.lower())
+    return a.issubset(b)
+i="the quick brown fox jumps over the lazy dog"
+o="yes" if alpha(i) else "no"
+print(o)
+_____________________________________________________________________________________
+travesels:-
+class node:
+    def _init_(self, u):
+        self.data = u
+        self.left = None
+        self.right = None
+
+class tree:
+    def _init_(self):
+        self.root = None
+
+    def create(self, root, x):
+        if root is None:
+            return node(x)
+        elif x < root.data:
+            root.left = self.create(root.left, x)
+        else:
+            root.right = self.create(root.right, x)
+        return root
+
+    def inorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.inorder(root.left, re)
+            re.append(root.data)
+            self.inorder(root.right, re)
+        return re
+
+    def preorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            re.append(root.data)
+            self.preorder(root.left, re)
+            self.preorder(root.right, re)
+        return re
+
+    def postorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.postorder(root.left, re)
+            self.postorder(root.right, re)
+            re.append(root.data)
+        return re
+
+t1 = tree()
+t1.root = t1.create(t1.root, 10)
+t1.root = t1.create(t1.root, 5)
+t1.root = t1.create(t1.root, 15)
+t1.root = t1.create(t1.root, 2)
+t1.root = t1.create(t1.root, 7)
+t1.root = t1.create(t1.root, 1)
+t1.root = t1.create(t1.root, 3)
+
+print("Inorder",t1.inorder(t1.root))
+print("Preorder",t1.preorder(t1.root))
+print("Postorder",t1.postorder(t1.root))
+_____________________________________________________________________________________
+
+class node:
+    def _init_(self, u):
+        self.data = u
+        self.left = None
+        self.right = None
+class tree:
+    def  _init_(self):
+        self.root = None
+    def create(self, root, x):
+        if root is None:
+            return node(x)
+        elif x < root.data:
+            root.left = self.create(root.left, x)
+        else:
+            root.right = self.create(root.right, x)
+        return root
+    def inorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.inorder(root.left, re)
+            re.append(root.data)
+            self.inorder(root.right, re)
+        return re
+    def preorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            re.append(root.data)
+            self.preorder(root.left, re)
+            self.preorder(root.right, re)
+        return re
+    def postorder(self, root, re=None):
+        if re is None:
+            re = []
+        if root:
+            self.postorder(root.left, re)
+            self.postorder(root.right, re)
+            re.append(root.data)
+        return re
+    def sum_tree(self, root):
+        if root is None:
+            return 0
+        return root.data+self.sum_tree(root.left)+self.sum_tree(root.right)
+    def sum_even(self, root):
+        if root is None:
+            return 0
+        sum_left=self.sum_even(root.left)
+        sum_right=self.sum_even(root.right)
+        return (root.data if root.data%2==0 else 0)+sum_left+sum_right
+    def sum_odd(self, root):
+        if root is None:
+            return 0
+        sum_left = self.sum_odd(root.left)
+        sum_right = self.sum_odd(root.right)
+        return (root.data if root.data % 2 != 0 else 0) + sum_left + sum_right
+    def diff_eo(self, root):
+        even_sum=self.sum_even(root)
+        odd_sum=self.sum_odd(root)
+        return even_sum-odd_sum
+t1=tree()
+t1.root=t1.create(t1.root, 10)
+t1.root=t1.create(t1.root, 5)
+t1.root=t1.create(t1.root, 15)
+t1.root=t1.create(t1.root, 2)
+t1.root=t1.create(t1.root, 7)
+t1.root=t1.create(t1.root, 1)
+t1.root=t1.create(t1.root, 3)
+print("Inorder:", t1.inorder(t1.root))
+print("Preorder:", t1.preorder(t1.root))
+print("Postorder:", t1.postorder(t1.root))
+print("Sum of all nodes:", t1.sum_tree(t1.root))
+print("sum of left nodes:",t1.sum_tree(t1.root.left))
+print("sum of even nodes:",t1.sum_even(t1.root))
+print("sum of odd nodes:",t1.sum_odd(t1.root))
+print("difference between even and odd sums:",t1.diff_eo(t1.root))
+_________________________________________________________________________________________________
+class node:
+    def _init_(self, u):
+        self.data=u
+        self.left=None
+        self.right=None
+class tree:
+    def  _init_(self):
+        self.root=None
+    def create(self,root,x):
+        if root is None:
+            return node(x)
+        elif x<root.data:
+            root.left=self.create(root.left,x)
+        else:
+            root.right=self.create(root.right,x)
+        return root
+    def inorder(self,root,re=None):
+        if re is None:
+            re=[]
+        if root:
+            self.inorder(root.left,re)
+            re.append(root.data)
+            self.inorder(root.right,re)
+        return re
+    def preorder(self,root,re=None):
+        if re is None:
+            re=[]
+        if root:
+            re.append(root.data)
+            self.preorder(root.left,re)
+            self.preorder(root.right,re)
+        return re
+    def postorder(self,root,re=None):
+        if re is None:
+            re=[]
+        if root:
+            self.postorder(root.left,re)
+            self.postorder(root.right,re)
+            re.append(root.data)
+        return re
+    def sum_tree(self,root):
+        if root is None:
+            return 0
+        return root.data+self.sum_tree(root.left)+self.sum_tree(root.right)
+    def sum_even(self,root):
+        if root is None:
+            return 0
+        sum_left=self.sum_even(root.left)
+        sum_right=self.sum_even(root.right)
+        return (root.data if root.data%2==0 else 0)+sum_left+sum_right
+    def sum_odd(self,root):
+        if root is None:
+            return 0
+        sum_left=self.sum_odd(root.left)
+        sum_right=self.sum_odd(root.right)
+        return (root.data if root.data%2!=0 else 0)+sum_left+sum_right
+    def diff_eo(self,root):
+        even_sum=self.sum_even(root)
+        odd_sum=self.sum_odd(root)
+        return even_sum-odd_sum
+    def height(self, root):
+        if root is None:
+            return -1
+        left_height=self.height(root.left)
+        right_height=self.height(root.right)
+        return max(left_height,right_height)+1
+    def balanced(self,root):
+        if root is None:
+            return 0
+        left=self.balanced(root.left)
+        right=self.balanced(root.right)
+        return abs(left-right)<=1
+        if(balanced(root)):
+            print("balanced")
+        else:
+            print("not balanced")
+    def leaf_node(self, root):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return 1
+        return self.leaf_node(root.left)+self.leaf_node(root.right)
+    def sum_leaf_nodes(self,root):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return root.data
+        return self.sum_leaf_nodes(root.left)+self.sum_leaf_nodes(root.right)
+    def search(self,root,x):
+        if(root==None):
+            return "nf"
+        if(root.data==x):
+            return "f"
+        if(root.data>x):
+            return self.search(root.left,x)
+        else:
+            return self.search(root.right,x)
+    def depth(self,root,y,c):
+        if(root==None):
+            return -1
+        if(root.data==y):
+            return c
+        if(root.data>y):
+            return self.depth(root.left,y,c+1)
+        else:
+            return self.depth(root.right,y,c+1)
+t1=tree()
+t1.root=t1.create(t1.root, 10)
+t1.root=t1.create(t1.root, 5)
+t1.root=t1.create(t1.root, 15)
+t1.root=t1.create(t1.root, 2)
+t1.root=t1.create(t1.root, 7)
+t1.root=t1.create(t1.root, 1)
+t1.root=t1.create(t1.root, 3)
+print("Inorder:", t1.inorder(t1.root))
+print("Preorder:", t1.preorder(t1.root))
+print("Postorder:", t1.postorder(t1.root))
+print("Sum of all nodes:", t1.sum_tree(t1.root))
+print("sum of left nodes:",t1.sum_tree(t1.root.left))
+print("sum of even nodes:",t1.sum_even(t1.root))
+print("sum of odd nodes:",t1.sum_odd(t1.root))
+print("difference between even and odd sums:",t1.diff_eo(t1.root))
+print("height of a tree:",t1.height(t1.root))
+print("balanced of a tree:",t1.balanced(t1.root))
+print("leaf nodes of a tree:",t1.leaf_node(t1.root))
+print("sum of leaf nodes:",t1.sum_leaf_nodes(t1.root))
+print("search of tree:",t1.search(t1.root))
+print("depth of a tree:",t1.depth(t1.root))
+_____________________________________________________________________________________
+
+ip:- [4,8,14,22,36,68]
+ the output should in the range of between the numbers of top prime number
+ for example:-
+ 4-8:-the top prime number is 7
+ 8-14:-the top prime nunmber is 13
+ 14-22:- the top prime number is 19
+ 22-36:-the top prime number is 31
+ 36-38:-the top prime number is 67
+ the output must be:-7+13+19+31+67=?
+
+def is_prime(n):
+    for i in range(2,int(n**0.5)+1):
+        if n%i==0:
+            return 0
+    return 1
+def top_prime_between(a,b):
+    for num in range(b-1,a,-1):
+        if is_prime(num):
+            return num
+    return 0
+ip=[14,16,20,22]
+output=[top_prime_between(ip[i],ip[i+1]) for i in range(len(ip)-1)]
+total_sum=sum(output)
+print("Top prime numbers between the range:",output)
+print("Sum of the top prime numbers:",total_sum)
+_____________________________________________________________________________________
+sequence of 3 to form in a ascending order:-
+a=[4,9,8,2,14,3,5,6]
+"""4 2 8 3 5 6 9 14"""
+for i in range(len(a)-2):
+   
+    if(a[i+1]>a[i+2]):
+        a[i],a[i+1]=a[i+1],a[i]
+        if(a[i+1]>a[i+2]):
+            a[i+1],a[i+2]=a[i+2],a[i+1]
+        if(a[i]>a[i+1]):
+            a[i],a[i+1]=a[i+1],a[i]
+        
+print(a)
+_____________________________________________________________________________________
+a=input().split(',')
+for i in a:
+    b=i.split(":")
+    l=len(b[0])
+    if(str(l) in b[1]):
+        s=s+b[0][-1]
+    else:
+        for i in range(l-1,0,-1):
+            if(str(i) in b[1]):
+                s=s+b[0][i-1]
+                break
+        else:
+            s=s+'x'
+print(s)
+_____________________________________________________________________________________
+
+class tree:
+    class node:
+        def _init_(self,u):
+            self.data=u
+            self.left=None
+            self.right=None
+    def _init_(self):
+        self.root=None
+    def create(self,root,x):
+        if root is None:
+            return self.node(x)
+        elif x<root.data:
+            root.left=self.create(root.left,x)
+        else:
+            root.right=self.create(root.right,x)
+        return root
+    def inorder(self,root,re=None):
+        if re is None:
+            re=[]
+        if root:
+            self.inorder(root.left,re)
+            re.append(root.data)
+            self.inorder(root.right,re)
+        return re
+    def preorder(self,root,re=None):
+        if re is None:
+            re=[]
+        if root:
+            re.append(root.data)
+            self.preorder(root.left,re)
+            self.preorder(root.right,re)
+        return re
+    def postorder(self,root,re=None):
+        if re is None:
+            re=[]
+        if root:
+            self.postorder(root.left,re)
+            self.postorder(root.right,re)
+            re.append(root.data)
+        return re
+    def sum_tree(self,root):
+        if root is None:
+            return 0
+        return root.data+self.sum_tree(root.left)+self.sum_tree(root.right)
+    def sum_even(self,root):
+        if root is None:
+            return 0
+        sum_left=self.sum_even(root.left)
+        sum_right=self.sum_even(root.right)
+        return (root.data if root.data % 2 == 0 else 0)+sum_left+sum_right
+    def sum_odd(self,root):
+        if root is None:
+            return 0
+        sum_left=self.sum_odd(root.left)
+        sum_right=self.sum_odd(root.right)
+        return (root.data if root.data % 2 != 0 else 0) + sum_left + sum_right
+    def diff_eo(self,root):
+        even_sum=self.sum_even(root)
+        odd_sum=self.sum_odd(root)
+        return even_sum-odd_sum
+    def height(self, root):
+        if root is None:
+            return -1
+        left_height=self.height(root.left)
+        right_height=self.height(root.right)
+        return max(left_height,right_height)+1
+    def balanced(self,root):
+        if root is None:
+            return 0
+        left=self.balanced(root.left)
+        right=self.balanced(root.right)
+        return abs(left-right)<=1
+    def leaf_node(self,root):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return 1
+        return self.leaf_node(root.left)+self.leaf_node(root.right)
+    def sum_leaf_nodes(self,root):
+        if root is None:
+            return 0
+        if root.left is None and root.right is None:
+            return root.data
+        return self.sum_leaf_nodes(root.left)+self.sum_leaf_nodes(root.right)
+    def search(self,root,key):
+        if root is None or root.data==key:
+            return root
+        if key<root.data:
+            return self.search(root.left,key)
+        return self.search(root.right,key)
+    def top_view(self):
+        if not self.root:
+            return []
+        result=[]
+        queue=[(self.root, 0)]
+        hd_dict={}
+        while queue:
+            node, hd=queue.pop(0)
+            if hd not in hd_dict:
+                hd_dict[hd]=node.data
+                result.append(node.data)
+            if node.left:
+                queue.append((node.left,hd-1))
+            if node.right:
+                queue.append((node.right,hd+1))
+        return result
+    def bottom_view(self):
+        if not self.root:
+            return []
+        result=[]
+        queue=[(self.root,0)]
+        hd_dict={}
+        while queue:
+            node, hd=queue.pop(0)
+            hd_dict[hd]=node.data
+            if node.left:
+                queue.append((node.left,hd-1))
+            if node.right:
+                queue.append((node.right,hd+1))
+        for hd in sorted(hd_dict.keys()):
+            result.append(hd_dict[hd])
+        return result
+    def left_view(self):
+        if not self.root:
+            return []
+        result=[]
+        queue=[self.root]
+        while queue:
+            level_size=len(queue)
+            for i in range(level_size):
+                node=queue.pop(0)
+                if i==0:
+                    result.append(node.data)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return result
+    def right_view(self):
+        if not self.root:
+            return []
+        result=[]
+        queue=[self.root]
+        while queue:
+            level_size=len(queue)
+            for i in range(level_size):
+                node=queue.pop(0)
+                if i==level_size-1:
+                    result.append(node.data)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+        return result 
+    def level_order(self):
+        if not self.root:
+            return []
+        result=[]
+        queue=[self.root]
+        while queue:
+            level_size=len(queue)
+            level=[]
+            for _ in range(level_size):
+                node=queue.pop(0)
+                level.append(node.data)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            result.append(level)
+        return result
+t1 = tree()
+t1.root=t1.create(t1.root,10)
+t1.root=t1.create(t1.root,5)
+t1.root=t1.create(t1.root,15)
+t1.root=t1.create(t1.root,2)
+t1.root=t1.create(t1.root,7)
+t1.root=t1.create(t1.root,1)
+t1.root=t1.create(t1.root,3)
+print("Inorder:",t1.inorder(t1.root))
+print("Preorder:",t1.preorder(t1.root))
+print("Postorder:",t1.postorder(t1.root))
+print("Sum of all nodes:",t1.sum_tree(t1.root))
+print("Sum of left nodes:",t1.sum_tree(t1.root.left))
+print("Sum of even nodes:",t1.sum_even(t1.root))
+print("Sum of odd nodes:",t1.sum_odd(t1.root))
+print("Difference between even and odd sums:",t1.diff_eo(t1.root))
+print("Height of the tree:",t1.height(t1.root))
+print("Balanced tree check:",t1.balanced(t1.root))
+print("Count of leaf nodes:",t1.leaf_node(t1.root))
+print("Sum of leaf nodes:",t1.sum_leaf_nodes(t1.root))
+print("Top View:",t1.top_view())
+print("Bottom View:",t1.bottom_view())
+print("Left View:",t1.left_view())
+print("Right View:",t1.right_view())
+print("level order:",t1.level_order())
+_____________________________________________________________________________________
+dfs:
+def fun(a,x):
+    l.append(x)
+    for i in a[x]:
+        if i not in l:
+            fun(a,i)
+a={5:[7,3],3:[5,7,8],7:[5,3,4],4:[7,8,2],8:[3,4,2],2:[4,8]}
+l=[]
+fun(a,5)
+print(l)
+_____________________________________________________________________________________
+short path of a graph:-
+def fun(a,x,e,c,m,l1):
+    l.append(x)
+    if(x==e):
+        if(c<m):
+            m=c
+            l1=l.copy()
+        l.pop()
+        return m,l1
+    for i in a[x]:
+        if i[0] not in l:
+            m,l1=fun(a,i[0],e,c+i[1],m,l1)
+    l.pop()
+    return m,l1
+a={5:[(7,2),(3,1)],3:[5,7,8],7:[5,3,4],4:[7,8,2],8:[3,4,2],2:[4,8]}
+l=[]
+print(fun(d,5,2,0,99999,[]))
+
+
+def fun(a,x,e,c,m,l1):
+    l.append(x)
+    if(x==e):
+        if(c<m):
+            m=c
+            l1=l.copy()
+        l.pop()
+        return m,l1
+    for i in a[x]:
+        if i[0] not in l:
+            m,l1=fun(a,i[0],e,c+i[1],m,l1)
+    l.pop()
+    return m,l1
+a={5:[(7,2),(3,1)],3:[5,1),7,2),8,3)],7:[(5,2),(3,2),(4,6)],4:[(7,6),(8,1),(2,2)],8:[3,3),4,1),2,1)],2:[4,2),8,1)]}
+l=[]
+for i in d.keys():
+    print(fun(d,5,2,0,99999,[]))
+_____________________________________________________________________________________
+
+bfs:
+
+def bfs(a,n):
+    vi=[]
+    q=[n]
+    while(q):
+        for i in a[q[0]]:
+            if(i not in q and i[0] not in vi):
+                q.append(i[0])
+        vi.append(q.pop(0))
+        print(vi[-1])
+def fun(a,x,e,c,m,l1):
+    l.append(x)
+    if(x==e):
+        if(c<m):
+            m=c
+            l1=l.copy()
+        l.pop()
+        return m,l1
+    for i in a[x]:
+        if i[0] not in l:
+            m,l1=fun(a,i[0],e,c+i[1],m,l1)
+    l.pop()
+    return m,l1
+a={5:[(7,2),(3,1)],3:[(5,1),(7,2),(8,3)],7:[(5,2),(3,2),(4,6)],4:[(7,6),(8,1),(2,2)],8:[(3,3),(4,1),(2,1)],2:[(4,2),(8,1)]}
+l=[]
+bfs(a,5)
+_____________________________________________________________________________________
+
+l1 = [6, 3, 2, 9, 4, 7]
+l2 = [8, 7, 5, 3, 6, 9]
+
+result = [x + y for x in l1 for y in l2 if x % 2 == 0 and y % 2 != 0]
+
+print(result)
+
+
+def dijkstra(g,s):
+    d={n:float('inf') for n in g}
+    d[s]=0
+    pq=[(0,s)]
+    while pq:
+        c_d,c_n=pq.pop(0)
+        if c_d>d[c_n]:
+            continue
+        for neig,w in g[c_n]:
+            dis=c_d+w
+            if dis<d[neig]:
+                d[neig]=dis
+                pq.append((dis,neig))
+                pq.sort()
+    return d
+g={5:[(7,2),(3,1)],3:[(5,1),(7,2),(8,3)],7:[(5,2),(3,2),(4,6)],4:[(7,6),(8,1),(2,2)],8:[(3,3),(4,1),(2,1)],2:[(4,2),(8,1)]}
+s_n=5
+d=dijkstra(g, s_n)
+for n,dis in d.items():
+    print(f"Shortest distance from {s_n} to {n} is {dis}")
+_____________________________________________________________________________________
+
+waterfall the trapped container:
+
+def trapped_water(h):
+    if not h:
+        return 0
+    n=len(h)
+    left_max=[0]*n
+    right_max=[0]*n
+    w=0
+    left_max[0]=h[0]
+    for i in range(1, n):
+        left_max[i]=max(left_max[i-1],h[i])
+    right_max[n-1]=h[n-1]
+    for i in range(n-2,-1,-1):
+        right_max[i]=max(right_max[i+1],h[i])
+    for i in range(n):
+        w+=min(left_max[i],right_max[i]) -h[i]
+    return w
+h=[2,5,2,3,6,7,1,0,5,7]
+print(trapped_water(h)) 
+_____________________________________________________________________________________
+
+coins value of min number of coins:
+
+def min_coins(c,a):
+    dp=[float('inf')]*(a+1)
+    dp[0]=0
+    for c in arr:
+        for i in range(c,a+1):
+            dp[i]=min(dp[i],dp[i-c]+1)
+    return dp[a]
+arr=[1,3,4,5]
+a=17
+b=min_coins(arr,a)
+print(b)
+_____________________________________________________________________________________
+
+print all the paths and count the paths of a 4*3 matrix:
+
+def find_paths(i, j, m, n, path, all_paths):
+    if i == m - 1 and j == n - 1:
+        all_paths.append(path + [(i, j)])
+        return
+    if j + 1 < n:
+        find_paths(i, j + 1, m, n, path + [(i, j)], all_paths)
+    if i + 1 < m:
+        find_paths(i + 1, j, m, n, path + [(i, j)], all_paths)
+def count_paths(i, j, m, n):
+    if i == m - 1 and j == n - 1:
+        return 1
+    if i >= m or j >= n:
+        return 0
+    return count_paths(i, j + 1, m, n) + count_paths(i + 1, j, m, n)
+m = 4
+n = 3
+number_of_paths = count_paths(0, 0, m, n)
+all_paths = []
+find_paths(0, 0, m, n, [], all_paths)
+print(f"The number of unique paths in a {m}x{n} matrix is: {number_of_paths}")
+print("All paths:")
+for path in all_paths:
+    print(path)
+_____________________________________________________________________________________
+nqueen problem:
+ 
+def n_queens(n):
+    count = [0]
+    def is_safe(board, row, col):
+        for i in range(col):
+            if board[row][i] == 1:
+                return False
+        for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+            if board[i][j] == 1:
+                return False
+        for i, j in zip(range(row, n, 1), range(col, -1, -1)):
+            if board[i][j] == 1:
+                return False
+        return True
+    def solve(board, col):
+        if col >= n:
+            return True
+        for i in range(n):
+            if is_safe(board, i, col):
+                board[i][col] = 1
+                count[0] += 1
+                if solve(board, col + 1):
+                    return True
+                board[i][col] = 0
+                count[0] -= 1 
+        return False
+    def print_solution(board):
+        for row in board:
+            print(" ".join('Q' if x == 1 else '.' for x in row))
+    board = [[0 for _ in range(n)] for _ in range(n)]
+    if not solve(board, 0):
+        print("Solution does not exist")
+        return False
+    print_solution(board)
+    print(f"Number of queens placed: {count[0]}")
+    return True
+n_queens(8)
+____________________________________________________________________________________
+
+def count_paths(i,j,m,n):
+    if i==m-1 and j==n-1:
+        return 1
+    if i>=m or j>=n: 
+        return 0
+    return count_paths(i,j+1,m,n)+count_paths(i+1,j,m,n)
+m=4
+n=3
+number_of_paths=count_paths(0,0,m,n)
+print(number_of_paths)
+
+____________________________________________________________________________________
+
+input:[3,5,9,6,8,10]
+output:the output should be like the sun from morning 6 and evening 6, in the morning 6 the sunligth will go on how many buliding in the eveninig 6 the sunlight will go on how many bulidings the output must be like:
+    output:in the morning the sunlight will go on:[3,5,9,10]
+           in the evening the sunlight will go on:[10]
+def sun(n):
+    if not n:
+        return "input array is empty"
+    mrng=[]
+    evng=[]
+    max_h=float('-inf')
+    for h in n:
+        if h > max_h:
+            mrng.append(h)
+            max_h=h
+    max_h=float('-inf')
+    for h in reversed(n):
+        if h > max_h:
+            evng.insert(0, h) 
+            max_h=h
+
+    return {
+        "mrng": mrng,
+        "evng": evng
+    }
+a=[3, 5, 9, 6, 8, 10]
+output=sun(a)
+print(output)
+____________________________________________________________________________________
+
+the input has 2 strings and the strings contain no.s and letters. from that two strings extract the unique numbers and find the largest even number by keeping them together.
+
+import re
+from itertools import permutations
+def extract(s):
+    return re.findall(r'\d', s)
+def even_number(str1, str2):
+    d1=extract(str1)
+    d2=extract(str2)
+    combine=list(set(d1+d2))
+    even_d=[d for d in combine if int(d) % 2 == 0]
+    if not even_d:
+        return None 
+    all_permutations = permutations(combine)
+    output= None
+    for perm in all_permutations:
+        number_str = ''.join(perm)
+        if int(number_str) % 2 == 0:
+            if output is None or int(number_str) > int(output):
+                output = number_str
+    return output
+str1 = "tu5g2k1h8"
+str2 = "g5g8gd6h3"
+output=even_number(str1, str2)
+print(output)
+_____________________________________________________________________________________
+
+check weather a given number is palindrome or not , if it is palindrome print that number, if it is not give next nearest palindrome number.
+
+def is_palindrome(num):
+    return str(num) == str(num)[::-1]
+def next_palindrome(num):
+    while True:
+        num += 1
+        if is_palindrome(num):
+            return num
+def find_or_next_palindrome(num):
+    if is_palindrome(num):
+        return num
+    else:
+        return next_palindrome(num)
+num =7654
+result = find_or_next_palindrome(num)
+print(result)
+
+_____________________________________________________________________________________
+
+take string from the user and print a longest palindromic substring:
+
+def longest_palindromic_substring(s):
+    if s == "":
+        return ""
+    def expand_around_center(s, left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left + 1:right]
+    start, end = 0, 0
+    for i in range(len(s)):
+        len1 = len(expand_around_center(s, i, i))
+        len2 = len(expand_around_center(s, i, i + 1))
+        max_len = max(len1, len2)
+        if max_len > end - start:
+            start = i - (max_len - 1) // 2
+            end = i + max_len // 2
+    return s[start:end + 1]
+user_input = input("Enter a string: ")
+print("Longest Palindromic Substring:", longest_palindromic_substring(user_input))
+
+_____________________________________________________________________________________
+
+1 means inserting
+2 means searching
+ip: 5
+1 school
+1 world
+1 word
+1 scholar
+2 word
+2 wood
+3 sch
+op: true
+false
+true
+
+def i(word,w):
+    word.append(w)
+def s(word,w):
+    if not word:
+        return False
+    if word[0]==w:
+        return True
+    return s(word[1:],w)
+def starts_with(word,prefix):
+    if not word:
+        return False
+    if word[0].startswith(prefix):
+        return True
+    return starts_with(word[1:],prefix)
+word=[]
+i(word,"school")
+i(word,"world")
+i(word,"word")
+i(word,"scholar")
+search_results=[
+    s(word,"word"),   
+    s(word,"wood"),   
+    starts_with(word,"sch") 
+]
+for result in search_results:
+    print(result)
+
+* update the code to the count of the string.
+    for example:
+        sch
+        sch
+        has 2 the output must be 2
+
+def i(word, w):
+    word.append(w)
+def s(word, w):
+    if not word:
+        return 0
+    return (1 if word[0] == w else 0) + s(word[1:], w)
+def starts_with(word, prefix):
+    if not word:
+        return 0
+    return (1 if word[0].startswith(prefix) else 0) + starts_with(word[1:], prefix)
+word = []
+i(word, "word")
+i(word, "words")
+search_results = [  
+    starts_with(word, "wo") 
+]
+for result in search_results:
+    print(result)
+_____________________________________________________________________________________
+
+class node:
+    def init(self):
+        self.d={}
+        self.flag=0
+class tries:
+    def init(self):
+        self.root = node()
+
+    def insert(self, str):
+        t=self.root
+        for i in str:
+            if i not in t.d:
+                t.d[i] = node()
+            t=t.d[i]
+        t.flag= 1
+
+    def search(self, str):
+        t= self.root
+        for i in str:
+            if i not in t.d:
+                return False
+            t=t.d[i]
+        return t.flag
+
+    def start(self, prefix):
+        t= self.root
+        for i in prefix:
+            if i not in t.d:
+                return False
+            t=t.d[i]
+        return True
+    
+t1= tries()
+n=int(input())
+for i in range(n):
+    a,s=input().split()
+    if(a=='1'):
+        t1.insert(s)
+    if(a=='2'):
+        print(t1.search(s))
+    if(a=='3'):
+        print(t1.start(s))
+_____________________________________________________________________________________
+
+word
+world
+wood
+words
+apple
+aapricot
+[b,ba,wo,ap]
+print the prefix from the given list who has longest string in the trie:
+
+class Node:
+    def _init_(self):
+        self.d = {}
+        self.flag = 0
+class Tries:
+    def _init_(self):
+        self.root = Node()
+    def insert(self, word):
+        t = self.root
+        for char in word:
+            if char not in t.d:
+                t.d[char] = Node()
+            t = t.d[char]
+        t.flag = 1
+    def search(self, word):
+        t = self.root
+        for char in word:
+            if char not in t.d:
+                return False
+            t = t.d[char]
+        return t.flag
+    def start(self, prefix):
+        t = self.root
+        for char in prefix:
+            if char not in t.d:
+                return False, []
+            t = t.d[char]
+        words = []
+        self._collect_words(t, prefix, words)
+        return True, words
+    def _collect_words(self, node, prefix, words):
+        if node.flag:
+            words.append(prefix)
+        for char, next_node in node.d.items():
+            self._collect_words(next_node, prefix + char, words)
+    def find_longest_match(self, prefixes):
+        longest_match = ""
+        longest_word = ""
+        for prefix in prefixes:
+            found, words = self.start(prefix)
+            if found:
+                for word in words:
+                    if len(word) > len(longest_word):
+                        longest_word = word
+                        longest_match = prefix
+        return longest_match, longest_word
+t1 = Tries()
+words = ["word", "world", "wood", "words", "apple", "apricot"]
+for word in words:
+    t1.insert(word)
+prefixes = ["b", "ba", "wo", "ap"]
+longest_match, longest_word = t1.find_longest_match(prefixes)
+print(longest_word)
+_____________________________________________________________________________________
+def fun(i,j,c):
+    if(i<0 or i>=n or j>=m or j<0):#(i == k and j == l):
+        return c
+    if (i==n-1 and j==m-1):
+        c = c+1
+        return c
+    vi.append((i,j))
+    if((i-1,j) not in vi):
+        c = fun(i-1,j,c)
+    if((i+1,j) not in vi):
+        c = fun(i+1,j,c)
+    if((i,j-1) not in vi):
+        c = fun(i,j-1,c)
+    if((i,j+1) not in vi):
+        c = fun(i,j+1,c)
+    vi.pop()
+    return c
+n = int(input())
+m = int(input())
+vi=[]
+print(fun(0,0,0))
+_____________________________________________________________________________
+l=[1,3,4,5]
+r=17
+m=[-1]*(r+1)
+m[0]=0
+for i in l:
+    for j in range(1,r+1):
+        if j>=i:
+            if m[j-i]!=-1:
+                if m[j]!=-1:
+                    m[j]=min(m[j],m[j-i]+1)
+                else:
+                    m[j]=m[j-i]+1
+
+print(m[-1])
+________________________________________________________________________________
+a=input()
+b=input()
+c=set()
+for i in a:
+    if(i.isdigit()):
+        c.add(i)
+for i in b:
+    if(i.isdigit()):
+        c.add(i)
+d=list(sorted(c,reverse=True))
+if(int(d[-1])%2==0):
+    print(''.join(d))
+else:
+    for i in range(len(c)-2,-1,-1):
+        if(int(d[i])%2==0):
+            d.append(d.pop(i))
+            print(''.join(d))
+            break
+    else:
+        print(-1)
+_______________________________________________________________________________________
+arr = [2, 5, 2, 3, 6, 7, 1, 0, 5, 7]
+sunrise=0
+max_mrng=0
+for height in arr:
+    if height>max_mrng:
+        sunrise+=1
+        max_mrng=height
+sunset=0
+max_evng=0
+for height in reversed(arr):
+    if height>max_evng:
+        sunset+=1
+        max_evng=height
+print(sunrise)
+print(sunset)
+__________________________________________________________________________________________
+def queen(r):
+    if(r==n):
+        return
+    if(r!=u):
+        for c in range(n):
+            if(check(r,c)):
+                m[r][c]=1
+                break
+        return queen(r+1)
+def check(i,j):
+    if(i==u):
+        return 0
+    elif(j==v):
+        return 0
+    r,c=i,j
+    for i in range(r+1):
+        if(m[i][j]==1):
+            return 0
+    i=r
+    while(i>=0 and j>=0):
+        if(m[i][j]==1):
+            return 0
+        i=i-1
+        j=j-1
+    while(r>=0 and c<n):
+        if(m[r][c]==1):
+            return 0
+        r=r-1
+        c=c+1
+    return 1
+n=5
+u=1
+v=3
+m=[]
+for i in range(n):
+    m.append([0]*n)
+
+queen(0)
+print(m)
+______________________________________________________________________________________
+n=int(input())
+m=n
+while(1):
+    rev=0
+    temp=n
+    while(temp>0):
+        x=temp%10
+        rev=rev*10+x
+        temp=temp//10
+    
+    if(rev==n):
+        print(rev)
+        break
+    else:
+        n=n+1
+   __________________________________________________________________________________
+class node:
+    def __init__(self):
+        self.d={}
+        self.flag=0
+class tries:
+    def __init__(self):
+        self.root=node()
+    def insert(self,str): 
+        t=self.root
+        for i in str:
+            if i not in t.d:
+                t.d[i]=node()
+            
+            t=t.d[i]
+        t.flag=1
+    def search(self,str):
+        t=self.root
+        for i in str:
+            if(i not in t.d):
+                return False
+            t=t.d[i]
+        if(t.flag==1):
+            return True
+        else:
+            return False
+    def prefix_s(self,str):
+        t=self.root
+        for i in str:
+            if(i not in t.d):
+                return False
+            t=t.d[i]
+        return True
+    def all_preffix(self,str):
+        def fun(t,s):
+            if t.flag==1:
+                print(s)
+            for i in t.d:
+                fun(t.d[i],s+i)
+        t=self.root
+        s=""
+        for i in str:
+            if(i in t.d):
+                s=s+i
+                t=t.d[i]
+            else:
+                return 
+        fun(t,s)
+    def 
+t1=tries()
+t1.insert("word")
+t1.insert("world")
+print(t1.search("words"))
+print(t1.prefix_s("as"))
+n=int(input())
+for i in range(n):
+    a,s=input().split()
+    if(a=='1'):
+        t1.insert(s)
+    if(a=='2'):
+        print(t1.search(s))
+    if(a=='3'):
+        print(t1.prefix_s(s))
+    if(a=='4'):
+        t1.all_preffix(s)
+
+
+
